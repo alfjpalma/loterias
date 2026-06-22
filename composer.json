@@ -3,7 +3,7 @@
     "description": "Sistema de Control de Agencias de Loterías",
     "type": "project",
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.2",
         "phpoffice/phpspreadsheet": "^2.0",
         "mpdf/mpdf": "^8.2"
     },
