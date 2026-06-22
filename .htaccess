@@ -1,0 +1,26 @@
+Options -Indexes
+
+# Proteger archivos sensibles
+<FilesMatch "\.(sql|env|log|json|md|lock)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Bloquear acceso a carpetas internas
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /loterias/
+
+    # Redirigir todo a index.php excepto archivos/directorios reales
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# Headers de seguridad
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "same-origin"
+</IfModule>

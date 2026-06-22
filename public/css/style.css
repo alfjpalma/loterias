@@ -1,0 +1,146 @@
+/* ============================================================
+   Sistema de Control de Agencias de Loterías — Estilos
+   ============================================================ */
+
+:root {
+    --sidebar-width: 240px;
+    --sidebar-collapsed: 60px;
+    --sidebar-bg: #1a1d21;
+    --sidebar-hover: rgba(255,255,255,.08);
+    --sidebar-active: rgba(13,110,253,.25);
+    --transition: .25s ease;
+}
+
+/* ---- Layout base ---- */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f0f2f5;
+    font-size: 0.9rem;
+}
+
+.wrapper { min-height: 100vh; }
+
+/* ---- Sidebar ---- */
+.sidebar {
+    width: var(--sidebar-width);
+    min-height: 100vh;
+    background: var(--sidebar-bg);
+    transition: width var(--transition);
+    overflow: hidden;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1040;
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed);
+}
+
+.sidebar.collapsed .sidebar-text,
+.sidebar.collapsed .nav-section-title {
+    display: none;
+}
+
+.sidebar-header {
+    min-height: 56px;
+    white-space: nowrap;
+}
+
+.sidebar-nav { flex: 1; overflow-y: auto; scrollbar-width: thin; }
+
+.sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: .55rem 1rem;
+    color: rgba(255,255,255,.7);
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 0;
+    transition: background var(--transition), color var(--transition);
+    font-size: .875rem;
+}
+
+.sidebar-nav .nav-link i { font-size: 1.1rem; flex-shrink: 0; min-width: 22px; text-align: center; }
+
+.sidebar-nav .nav-link:hover {
+    background: var(--sidebar-hover);
+    color: #fff;
+}
+
+.sidebar-nav .nav-link.active {
+    background: var(--sidebar-active);
+    color: #6ea8fe;
+    border-left: 3px solid #0d6efd;
+    font-weight: 600;
+}
+
+/* ---- Content area ---- */
+.content-area {
+    min-width: 0;
+    transition: margin var(--transition);
+}
+
+/* ---- Stat cards ---- */
+.stat-card {
+    transition: transform .2s, box-shadow .2s;
+    cursor: default;
+}
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.15) !important;
+}
+
+/* ---- Tables ---- */
+.table th { font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .5px; }
+
+/* ---- Cards ---- */
+.card { border-radius: 10px; }
+.card-header { border-radius: 10px 10px 0 0 !important; }
+
+/* ---- Page header ---- */
+.page-header { border-left: 4px solid #0d6efd; padding-left: 12px; }
+
+/* ---- Number inputs — align right & no spinners ---- */
+input[type="number"] { text-align: right; }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
+
+/* ---- Responsive sidebar (mobile) ---- */
+@media (max-width: 767.98px) {
+    .sidebar {
+        position: fixed;
+        left: 0; top: 0;
+        width: var(--sidebar-width);
+        transform: translateX(-100%);
+        z-index: 1050;
+        height: 100%;
+    }
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.5);
+        z-index: 1045;
+    }
+    .sidebar-overlay.visible { display: block; }
+    .content-area { width: 100%; }
+}
+
+/* ---- Toast ---- */
+.toast-container { z-index: 9999; }
+
+/* ---- Print ---- */
+@media print {
+    .sidebar, .navbar, .btn, form, footer { display: none !important; }
+    .content-area { margin: 0 !important; }
+    .card { box-shadow: none !important; border: 1px solid #dee2e6 !important; }
+}

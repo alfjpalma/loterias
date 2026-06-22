@@ -1,0 +1,7 @@
+# Credenciales locales - NUNCA subir
+config/database.php
+
+# Archivos del sistema
+Thumbs.db
+.DS_Store
+*.log
